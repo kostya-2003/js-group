@@ -2,7 +2,7 @@ const localStorageData = JSON.parse(localStorage.getItem("product"));
  
 export default function createFlowerCart(parent, flower) {
   parent.innerHTML += `
-        <div class="cart">
+        <div class="cart" id=${flower.id}>
             <div class="imgAndTitle">
                 <div class="infoDiv">
                     <h1 class="titleH1">${flower.title}</h1>
@@ -23,10 +23,10 @@ export default function createFlowerCart(parent, flower) {
             <div class="buttonDiv">
                 <div class="heightBtn">
                     <label for="cars">Choose height</label>
-                    <select name="height" id="height">
+                    <select name="height" id=${flower.id}>
                         ${flower.height.map(
                           (heighta) =>
-                            ` <option value=${heighta}>${heighta}</option>`
+                            ` <option value=${heighta} class="optionValue">${heighta}</option>`
                         )}
                         
                     </select>
@@ -49,15 +49,28 @@ export default function createFlowerCart(parent, flower) {
 }
 
 function price(){
-    const a = document.querySelectorAll("#height");
-    a.forEach((btn, i) => {
-        btn.addEventListener("click", () =>{
-            createPrice()
+    const cart = document.querySelectorAll(".cart")
+   
+    cart.forEach(item => {
+        item.addEventListener("click", (e) =>{
+            const cartID = item.id;
+            const heightBtn = document.querySelectorAll(".heightBtn");
+            heightBtn.forEach(item => {
+                const optionID = item.children[1].id;
+                if(optionID === cartID){
+                    const data = JSON.parse(localStorage.getItem("product"));
+                    const localStoragesData = [...Object.values(data)];  
+                    const selectidCart = localStoragesData.filter(item => item.id === +cartID)[0];
+                    console.log(selectidCart);
+                }
+            })
+            // Stacel enq konkret obsheni objekty, petq e poxenq yst heighti giny "Bari gisher dzez)))"
+            
         })
     })
+    
 }
 
 function createPrice(value){
     const price = document.getElementById("priceText");
-
 }
