@@ -1,5 +1,7 @@
-const localStorageData = JSON.parse(localStorage.getItem("product"));
- 
+const localStorageData = Object.values(
+  JSON.parse(localStorage.getItem("product"))
+);
+
 export default function createFlowerCart(parent, flower) {
   parent.innerHTML += `
         <div class="cart" id=${flower.id}>
@@ -18,18 +20,22 @@ export default function createFlowerCart(parent, flower) {
             </div>
             <div class="priceDiv">
                 <h1>Price</h1>
-                <h1 id="priceText">${flower.price}</h1>
+                <h1 id="priceText${flower.id}">${
+    flower.price * flower.height[0]
+  }</h1>
             </div>
             <div class="buttonDiv">
                 <div class="heightBtn">
                     <label for="cars">Choose height</label>
-                    <select name="height" id=${flower.id}>
-                        ${flower.height.map(
-                          (heighta) =>
-                            ` <option value=${heighta} class="optionValue">${heighta}</option>`
-                        )}
-                        
-                    </select>
+                   
+                   <select name="height" class="selectHeight" id=${flower.id} >
+                   ${flower.height.map(
+                     (heighta) =>
+                       ` <option value=${heighta} class="optionValue">${heighta}</option>`
+                   )}
+                   
+               </select>
+                   
                 </div>
             </div>
             <div class="quantBtn">
@@ -42,35 +48,46 @@ export default function createFlowerCart(parent, flower) {
             </div>
             <div class="totalDiv">
                 <h1 class="totalH1">Total</h1>
-                <h3 class="totalPriceH3">300$</h3>
+                <h3 class="totalPriceH3" id=${flower.id}>${
+    flower.price * flower.height[0]
+  }</h3>
             </div>
         </div>`;
-    price()
+
+  changePrice();
+  incrDecr();
 }
 
-function price(){
-    const cart = document.querySelectorAll(".cart")
-   
-    cart.forEach(item => {
-        item.addEventListener("click", (e) =>{
-            const cartID = item.id;
-            const heightBtn = document.querySelectorAll(".heightBtn");
-            heightBtn.forEach(item => {
-                const optionID = item.children[1].id;
-                if(optionID === cartID){
-                    const data = JSON.parse(localStorage.getItem("product"));
-                    const localStoragesData = [...Object.values(data)];  
-                    const selectidCart = localStoragesData.filter(item => item.id === +cartID)[0];
-                    console.log(selectidCart);
-                }
-            })
-            // Stacel enq konkret obsheni objekty, petq e poxenq yst heighti giny "Bari gisher dzez)))"
-            
-        })
-    })
-    
+function changePrice() {
+  const selHeight = document.querySelectorAll(".selectHeight");
+  selHeight.forEach((item) => {
+    item.addEventListener("click", () => {
+      const { price } = localStorageData.find((obj) => obj.id === +item.id);
+      console.log(price);
+      const optVal = item.value;
+      const priceText = document.getElementById(`priceText${item.id}`);
+      priceText.textContent = `${optVal * price}`;
+    });
+  });
 }
 
-function createPrice(value){
-    const price = document.getElementById("priceText");
+function incrDecr() {
+  const incrBtn = document.querySelectorAll(".incrBtn");
+  const decrBtn = document.querySelectorAll(".decrBtn");
+  const quants = document.querySelectorAll(".quantP");
+
+  quants.forEach((quant, i) => {
+    console.log(quant.textContent);
+    const priceText = document.getElementById(`priceText${i + 1}`);
+    incrBtn[i].addEventListener("click", () => {
+      if (Number(quant.textContent) < 20) {
+        quant.textContent = `${+quant.textContent + 1}`;
+      }
+    });
+    decrBtn[i].addEventListener("click", () => {
+      if (Number(quant.textContent) > 1) {
+        quant.textContent = `${+quant.textContent - 1}`;
+      }
+    });
+  });
 }
