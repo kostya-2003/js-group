@@ -52,10 +52,12 @@ export default function createFlowerCart(parent, flower) {
     flower.price * flower.height[0]
   }</h3>
             </div>
+            <div><button class="delBtn" id="${flower.id}">DEL</button></div>
         </div>`;
 
   changePrice();
   incrDecr();
+  delFlower();
 }
 
 function changePrice() {
@@ -70,15 +72,20 @@ function changePrice() {
     });
   });
 }
-
+// function delFlower() {
+//   const main = document.querySelector("#mainCart");
+//   main.addEventListener("click", function (e) {
+//     if(e.target.i)
+//   });
+// }
 function incrDecr() {
   const incrBtn = document.querySelectorAll(".incrBtn");
   const decrBtn = document.querySelectorAll(".decrBtn");
   const quants = document.querySelectorAll(".quantP");
 
   quants.forEach((quant, i) => {
-    console.log(quant.textContent);
-    const priceText = document.getElementById(`priceText${i + 1}`);
+    // console.log(quant.textContent);
+
     incrBtn[i].addEventListener("click", () => {
       if (Number(quant.textContent) < 20) {
         quant.textContent = `${+quant.textContent + 1}`;
