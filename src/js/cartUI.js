@@ -1,8 +1,10 @@
-const localStorageData = Object.values(
-  JSON.parse(localStorage.getItem("product"))
-);
+import { changePrice } from "./cart";
 
-export default function createFlowerCart(parent, flower) {
+const localStorageData = localStorage.getItem("product")
+  ? Object.values(JSON.parse(localStorage.getItem("product")))
+  : [];
+
+export default function createFlowerCart(parent, flower, activeHeight) {
   parent.innerHTML += `
         <div class="cart" id=${flower.id}>
             <div class="imgAndTitle">
@@ -13,7 +15,6 @@ export default function createFlowerCart(parent, flower) {
                     <img
                     src= ${flower.img}
                     alt=${flower.title}
-                   
                     class="cartOneImg"
                     />
                 </div>
@@ -21,7 +22,7 @@ export default function createFlowerCart(parent, flower) {
             <div class="priceDiv">
                 <h1>Price</h1>
                 <h1 id="priceText${flower.id}">${
-    flower.price * flower.height[0]
+    flower.price * activeHeight
   }</h1>
             </div>
             <div class="buttonDiv">
@@ -48,53 +49,9 @@ export default function createFlowerCart(parent, flower) {
             </div>
             <div class="totalDiv">
                 <h1 class="totalH1">Total</h1>
-                <h3 class="totalPriceH3" id=${flower.id}>${
-    flower.price * flower.height[0]
-  }</h3>
+                <h3 class="totalPriceH3">
+                ${flower.price * activeHeight}</h3>
             </div>
             <div><button class="delBtn" id="${flower.id}">DEL</button></div>
         </div>`;
-
-  changePrice();
-  incrDecr();
-  delFlower();
-}
-
-function changePrice() {
-  const selHeight = document.querySelectorAll(".selectHeight");
-  selHeight.forEach((item) => {
-    item.addEventListener("click", () => {
-      const { price } = localStorageData.find((obj) => obj.id === +item.id);
-      console.log(price);
-      const optVal = item.value;
-      const priceText = document.getElementById(`priceText${item.id}`);
-      priceText.textContent = `${optVal * price}`;
-    });
-  });
-}
-// function delFlower() {
-//   const main = document.querySelector("#mainCart");
-//   main.addEventListener("click", function (e) {
-//     if(e.target.i)
-//   });
-// }
-function incrDecr() {
-  const incrBtn = document.querySelectorAll(".incrBtn");
-  const decrBtn = document.querySelectorAll(".decrBtn");
-  const quants = document.querySelectorAll(".quantP");
-
-  quants.forEach((quant, i) => {
-    // console.log(quant.textContent);
-
-    incrBtn[i].addEventListener("click", () => {
-      if (Number(quant.textContent) < 20) {
-        quant.textContent = `${+quant.textContent + 1}`;
-      }
-    });
-    decrBtn[i].addEventListener("click", () => {
-      if (Number(quant.textContent) > 1) {
-        quant.textContent = `${+quant.textContent - 1}`;
-      }
-    });
-  });
 }
