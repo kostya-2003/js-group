@@ -46,7 +46,7 @@ export default function createFlowerCart(parent, flower) {
                 <h3 class="totalPriceH3">
                 ${total}</h3>
             </div>
-            <div><button class="delBtn" id="${flower.id}">DEL</button></div>
+            <div><button class="delBtn" id="${flower.id}"><i class='bx bx-x'></i></button></div>
         </div>`;
 }
 

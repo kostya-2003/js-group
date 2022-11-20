@@ -15,6 +15,9 @@
   </head>
 
   <body>
+    <a id="backToTop" href="#">
+      <img src="./src/img/house-top-icon-17740.png" alt="">
+    </a>
     <header id="header">
       <div class="logoDiv">
         <h1 class="logoH1">THE FLOWERS</h1>
@@ -22,6 +25,21 @@
       </div>
       <div class="favDiv">
         <h1 class="cart"><i class='bx bx-cart'></i></h1>
+        <div class="hamburger">
+          <i class='bx bx-menu'></i>
+        </div>
+  
+        <div id="menuBar">
+          <button class="closeMenu">
+            <i class='bx bx-x'></i>
+          </button>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#">Flowers</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
       </div>
     </header>
     <main id="main">
@@ -36,6 +54,50 @@
       </div>
     </main>
     <div id="products"></div>
+    <div id="about">
+      <div class="title">
+        <h2>About Us</h2>
+      </div>
+      <div class="about-box">
+        <div class="about-left">
+          
+        </div>
+        <div class="about-right">
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut officiis numquam commodi quibusdam ut alias adipisci. Aperiam odio praesentium, dolore reprehenderit eius a esse architecto ea! Odio, itaque odit velit tenetur distinctio officia nisi laboriosam recusandae repudiandae eos similique labore illo ea cum nesciunt est earum consectetur tempore. Voluptas magnam dolore quam, modi vero tempore, repellat similique earum veniam, adipisci itaque ratione labore id voluptatibus. Commodi aliquid sunt possimus fuga quae, deleniti doloremque numquam aperiam eligendi suscipit quo, nisi hic!</p>
+        </div>
+      </div>
+    </div>
+    <div id="contact">
+      <div class="title">
+        <h2>Contact Me</h2>
+      </div>
+      <div class="contactBox">
+          <form id="my-form" action="https://formspree.io/f/mgeqkyjj" method="POST">
+              <div id="form_item">  
+                <input type="text" name="name" id="name" placeholder="Name"/>
+              </div>
+              <div id="form_item">
+                <input type="text" name="surname" id="surname" placeholder="Surname"/>
+              </div>  
+              <div id="form_item">
+            <input type="text" name="mail" id="mail" placeholder="Email"/>
+              </div>
+              <div id="form_item">
+            <input type="text" name="tel" id="tel" placeholder="Tel"/>
+              </div>
+              <div id="form_item">
+                <textarea name="message" id="message" placeholder="Message"></textarea>
+              </div>
+              <div id="form_item">
+              <button id="my-form-button">Отправить</button>
+                <p id="my-form-status"></p>
+              </div>
+              
+          </form>
+          <div class="contactImg"></div>
+      </div>
+      
+    </div>
     <script src="./build/all.js"></script>
   </body>
 </html>
