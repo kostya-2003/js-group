@@ -21,6 +21,7 @@
 #header .logoDiv {
   text-align: center;
   position: relative;
+  cursor: pointer;
 }
 #header .logoDiv .logoH1 {
   font-size: 25px;

@@ -20,3 +20,8 @@ cartBtn.addEventListener("click", (e) => {
   document.body.append(mainCart);
   cart();
 });
+
+const updateBtn = document.querySelector(".logoDiv");
+updateBtn.addEventListener("click", () => {
+  window.location.reload(true);
+});

@@ -19,21 +19,21 @@ export default function createCard(parent, data) {
 export function click(data) {
   const btnCart = document.querySelectorAll(".oneBtn");
   const dataStor = JSON.parse(localStorage.getItem("product"));
+  console.log(dataStor);
   let obj = {};
-  
-  btnCart.forEach((item, i) =>{
+
+  btnCart.forEach((item, i) => {
     item.addEventListener("click", (e) => {
       if (dataStor) {
-        obj = {...dataStor}
-        if(!obj[i]){
-          obj[i] = data[i]
-          localStorage.setItem("product", JSON.stringify(obj))
+        obj = { ...dataStor };
+        if (!obj[i]) {
+          obj[i] = data[i];
+          localStorage.setItem("product", JSON.stringify(obj));
         }
-      }else if(dataStor === null){
-        obj[i] = data[i]
-        localStorage.setItem("product", JSON.stringify(obj))
+      } else if (dataStor === null) {
+        obj[i] = data[i];
+        localStorage.setItem("product", JSON.stringify(obj));
       }
-    })
+    });
   });
 }
-
